@@ -27,7 +27,7 @@ Patch0:         %{name}-sleep-less.patch
 Patch4:         %{name}-drop-lang-from-pkgkit-format.patch
 
 BuildRequires:  gcc
-BuildRequires:  meson >= 1.11.0
+BuildRequires:  meson
 BuildRequires:  ninja-build
 BuildRequires:  pkgconfig
 BuildRequires:  fontpackages-devel
@@ -37,7 +37,6 @@ BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  gperf
 BuildRequires:  gettext
 BuildRequires:  docbook-utils
-BuildRequires:  docbook-utils-pdf
 BuildRequires:  python3
 
 # Register DTD system-wide to make validation work by default
@@ -81,6 +80,7 @@ which is useful for developing applications that uses fontconfig.
 %build
 %meson \
   -Ddoc=enabled \
+  -Ddoc-pdf=disabled \
   -Dtests=enabled \
   -Dcache-build=disabled \
   -Dxml-backend=libxml2 \
