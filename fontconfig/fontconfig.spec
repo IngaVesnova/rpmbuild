@@ -95,7 +95,6 @@ autoreconf -fiv --install
 
 %configure	--with-add-fonts=/usr/share/X11/fonts/Type1,/usr/share/X11/fonts/TTF,/usr/local/share/fonts \
 		--enable-libxml2 \
-		--disable-docs \
 		--disable-static --with-cache-dir=/usr/lib/fontconfig/cache
 
 make %{?_smp_mflags}
