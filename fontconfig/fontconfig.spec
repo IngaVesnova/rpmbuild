@@ -26,8 +26,9 @@ BuildRequires:	freetype-devel >= %{freetype_version}
 BuildRequires:	fontpackages-devel
 BuildRequires:	autoconf automake libtool gettext
 BuildRequires:	gperf
-BuildRequires:  docbook-utils docbook-utils-pdf
+BuildRequires:  docbook-utils
 BuildRequires: make
+BuildRequires: python3
 
 Requires:	fonts-filesystem freetype
 # Register DTD system-wide to make validation work by default
@@ -80,6 +81,7 @@ done
 autoreconf
 %configure	--with-add-fonts=/usr/share/X11/fonts/Type1,/usr/share/X11/fonts/TTF,/usr/local/share/fonts \
 		--enable-libxml2 \
+		--disable-docs \
 		--disable-static --with-cache-dir=/usr/lib/fontconfig/cache
 
 make %{?_smp_mflags}
@@ -950,7 +952,7 @@ fi
   .rpmsave files.
 
 - Renable s390 documentation now that #97079 has been fixed and add
-  BuildRequires: for docbook-utils and docbook-utils-pdf.
+  BuildRequires: for docbook-utils.
 
 - Drop code to iconv and custom install man pages, upstream does the
   right thing now.
