@@ -33,12 +33,12 @@ BuildRequires:  pkgconfig
 BuildRequires:  fontpackages-devel
 BuildRequires:  pkgconfig(freetype2) >= %{freetype_version}
 BuildRequires:  pkgconfig(json-c)
-BuildRequires:  pkgconfig(libxml2)
+BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  gperf
 BuildRequires:  gettext
 BuildRequires:  docbook-utils
 BuildRequires:  docbook-utils-pdf
-BuildRequires:  python3-base
+BuildRequires:  python3
 
 # Register DTD system-wide to make validation work by default
 # (used by fonts-rpm-macros)
