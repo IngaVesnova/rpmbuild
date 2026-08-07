@@ -25,6 +25,7 @@ BuildRequires:	libxml2-devel
 BuildRequires:	freetype-devel >= %{freetype_version}
 BuildRequires:	fontpackages-devel
 BuildRequires:	autoconf automake libtool gettext
+BuildRequires: gettext-devel
 BuildRequires:	gperf
 BuildRequires:  docbook-utils
 BuildRequires: make
