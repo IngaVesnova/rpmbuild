@@ -1,0 +1,19 @@
+--- a/tools/gen-script-for-lang.c	2026-08-07 19:53:59.739017087 +0300
++++ b/tools/gen-script-for-lang.c	2026-08-07 19:53:59.786894388 +0300
+@@ -240,11 +240,11 @@
+       max_lang_len = MAX (max_lang_len,
+                           (int)strlen (pango_language_to_string (info->lang)));
+ 
+-      g_sort_array (info->scripts,
+-                    G_N_ELEMENTS (info->scripts),
+-                    sizeof (info->scripts[0]),
+-                    compare_script,
+-                    info);
++      g_qsort_with_data (info->scripts,
++                         G_N_ELEMENTS (info->scripts),
++                         sizeof (info->scripts[0]),
++                         compare_script,
++                         info);
+ 
+       for (j = 0; j < MAX_SCRIPTS; j++)
+         if (!info->scripts[j].freq)
