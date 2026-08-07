@@ -21,15 +21,25 @@ Source2:	fc-cache
 Patch0:		%{name}-sleep-less.patch
 Patch4:		%{name}-drop-lang-from-pkgkit-format.patch
 
-BuildRequires:	libxml2-devel
-BuildRequires:	freetype-devel >= %{freetype_version}
-BuildRequires:	fontpackages-devel
-BuildRequires:	autoconf automake libtool gettext
-BuildRequires: gettext-devel
-BuildRequires:	gperf
+BuildRequires:  gcc
+BuildRequires:  gcc-c++
+BuildRequires:  pkgconfig
+BuildRequires:  make
+
+BuildRequires:  freetype-devel >= %{freetype_version}
+BuildRequires:  libxml2-devel
+BuildRequires:  fontpackages-devel
+BuildRequires:  gettext-devel
+BuildRequires:  pkgconfig(json-c)
+
+BuildRequires:  autoconf
+BuildRequires:  automake
+BuildRequires:  libtool
+BuildRequires:  gettext
+BuildRequires:  gperf
+
 BuildRequires:  docbook-utils
-BuildRequires: make
-BuildRequires: python3
+BuildRequires:  python3
 
 Requires:	fonts-filesystem freetype
 # Register DTD system-wide to make validation work by default
@@ -79,7 +89,10 @@ export HASDOCBOOK=no
 for i in doc/*.fncs; do
   touch -r $i ${i//.fncs/.sgml}
 done
-autoreconf
+
+autopoint --force
+autoreconf -fiv --install
+
 %configure	--with-add-fonts=/usr/share/X11/fonts/Type1,/usr/share/X11/fonts/TTF,/usr/local/share/fonts \
 		--enable-libxml2 \
 		--disable-docs \
