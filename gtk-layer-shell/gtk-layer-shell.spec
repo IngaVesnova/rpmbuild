@@ -6,7 +6,7 @@ Summary:        Library to create components for Wayland using the Layer Shell
 
 License:        LGPL-3.0-or-later AND MIT
 Url:            https://github.com/wmww/gtk-layer-shell
-Source0:        https://github.com/wmww/gtk-layer-shell/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/wmww/%{name}/archive/refs/tags/v%{version}.tar.gz
 # OBS's cached AlmaLinux:10 mirror serves a pango-devel build without the
 # GIR files; provide the Pango include closure needed by g-ir-scanner.
 Source10:       gir-pango-1.0.tar.gz
@@ -14,11 +14,11 @@ Source10:       gir-pango-1.0.tar.gz
 BuildRequires:  gcc
 BuildRequires:  meson >= 0.45.1
 BuildRequires:  pkgconfig(gtk+-wayland-3.0) >= 3.22.0
+
 BuildRequires:  pkgconfig(gobject-introspection-1.0)
 BuildRequires:  pkgconfig(wayland-client) >= 1.10.0
 BuildRequires:  pkgconfig(wayland-protocols) >= 1.16
 BuildRequires:  pkgconfig(wayland-scanner) >= 1.10.0
-BuildRequires:  pkgconfig(wayland-server) >= 1.10.0
 # GIR include closure for g-ir-scanner (RHEL 10 does not pull these
 # transitively via gtk3-devel):
 BuildRequires:  pkgconfig(atk)
@@ -53,8 +53,10 @@ mkdir -p gir-pango
 tar xzf %{SOURCE10} -C gir-pango/
 export GI_GIR_PATH=$PWD/gir-pango
 %meson \
-    -Dvapi=false \
-    %{nil}
+    -Dexamples=false \
+    -Dtests=false \
+    -Dvapi=false
+
 %meson_build
 
 %install
