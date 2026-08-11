@@ -67,7 +67,7 @@ export CFLAGS='-std=c11 %optflags'
   -Dbuild-testsuite=false \
   -Dbuild-examples=false \
   -Ddocumentation=false \
-  -Dintrospection=enable
+  -Dintrospection=enabled
 
 %meson_build
 
