@@ -7,10 +7,6 @@ License:        GPL-2.0-or-later AND LGPL-2.0-or-later AND LGPL-2.1-or-later AND
 URL:            https://wiki.gnome.org/Projects/GObjectIntrospection
 Source:         https://download.gnome.org/sources/gobject-introspection/1.84/gobject-introspection-%{version}.tar.xz
 
-# Workaround for Python 3.12 compatibility
-# https://bugzilla.redhat.com/show_bug.cgi?id=2208966
-Patch:          gobject-introspection-workaround.patch
-
 BuildRequires:  bison
 BuildRequires:  flex
 BuildRequires:  gcc
@@ -52,7 +48,6 @@ Libraries and headers for gobject-introspection
 
 %prep
 %autosetup -p1
-mv giscanner/ast.py giscanner/gio_ast.py
 
 %build
 %meson -Ddoctool=enabled -Dgtk_doc=false -Dpython=%{__python3}
