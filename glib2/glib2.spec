@@ -118,9 +118,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_libdir}/libgmodule-2.0.so.0*
 %{_libdir}/libgobject-2.0.so.0*
 %{_libdir}/libgio-2.0.so.0*
-%if %{introspection}
 %{_libdir}/libgirepository-2.0.so.0*
 %dir %{_libdir}/girepository-1.0
+%if %{introspection}
 %{_libdir}/girepository-1.0/GIRepository-3.0.typelib
 %{_libdir}/girepository-1.0/GLib-2.0.typelib
 %{_libdir}/girepository-1.0/GLibUnix-2.0.typelib
@@ -163,6 +163,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_datadir}/glib-2.0/dtds
 %{_datadir}/glib-2.0/gdb
 %{_datadir}/glib-2.0/gettext
+%{_datadir}/glib-2.0/codegen
 %{_datadir}/glib-2.0/schemas/gschema.dtd
 %{_datadir}/glib-2.0/valgrind/glib.supp
 %{bash_completions_dir}/gresource
@@ -185,6 +186,12 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_mandir}/man1/glib-compile-resources.1*
 %{_mandir}/man1/gresource.1*
 %{_datadir}/gdb/
+%{_bindir}/gi-compile-repository
+%{_bindir}/gi-decompile-typelib
+%{_bindir}/gi-inspect-typelib
+%{_mandir}/man1/gi-compile-repository.1*
+%{_mandir}/man1/gi-decompile-typelib.1*
+%{_mandir}/man1/gi-inspect-typelib.1*
 %if %{introspection}
 %dir %{_datadir}/gir-1.0
 %{_datadir}/gir-1.0/GIRepository-3.0.gir
@@ -194,12 +201,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_datadir}/gir-1.0/GObject-2.0.gir
 %{_datadir}/gir-1.0/Gio-2.0.gir
 %{_datadir}/gir-1.0/GioUnix-2.0.gir
-%{_bindir}/gi-compile-repository
-%{_bindir}/gi-decompile-typelib
-%{_bindir}/gi-inspect-typelib
-%{_mandir}/man1/gi-compile-repository.1*
-%{_mandir}/man1/gi-decompile-typelib.1*
-%{_mandir}/man1/gi-inspect-typelib.1*
 %endif
 %{_datadir}/gettext/
 %{_datadir}/systemtap/
