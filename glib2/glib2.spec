@@ -74,6 +74,7 @@ The glib2-devel package includes the header files for the GLib library.
     -Dglib_debug=disabled \
     -Ddocumentation=false \
     -Dinstalled_tests=false \
+    -Dsysprof=disabled \
     --default-library=shared \
 %if %{introspection}
     -Dintrospection=enabled \
