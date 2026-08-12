@@ -119,8 +119,8 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_libdir}/libgobject-2.0.so.0*
 %{_libdir}/libgio-2.0.so.0*
 %{_libdir}/libgirepository-2.0.so.0*
-%dir %{_libdir}/girepository-1.0
 %if %{introspection}
+%dir %{_libdir}/girepository-1.0
 %{_libdir}/girepository-1.0/GIRepository-3.0.typelib
 %{_libdir}/girepository-1.0/GLib-2.0.typelib
 %{_libdir}/girepository-1.0/GLibUnix-2.0.typelib
