@@ -4,7 +4,7 @@
 # To break the cycle we first build glib2 WITHOUT introspection (set to 0),
 # then build gobject-introspection, then flip this to 1 and rebuild glib2
 # (and gobject-introspection) WITH it.
-%global introspection 0
+%global introspection 1
 
 Name:           glib2
 Version:        2.82.5
