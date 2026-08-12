@@ -1,10 +1,10 @@
 # Bootstrap note:
 # glib2 needs gobject-introspection (g-ir-scanner) to build its own typelibs,
 # but gobject-introspection in turn needs a newer glib2 than EPEL 10 ships.
-# To break the cycle we first build glib2 WITHOUT introspection, then build
-# gobject-introspection, then flip the %bcond below to `%bcond_without
-# introspection` and rebuild glib2 (and gobject-introspection) WITH it.
-%bcond_with introspection
+# To break the cycle we first build glib2 WITHOUT introspection (set to 0),
+# then build gobject-introspection, then flip this to 1 and rebuild glib2
+# (and gobject-introspection) WITH it.
+%global introspection 0
 
 Name:           glib2
 Version:        2.82.5
@@ -13,7 +13,7 @@ Summary:        A library of handy utility functions
 
 License:        LGPL-2.1-or-later
 URL:            https://www.gtk.org
-Source:         glib-%{version}.tar.xz
+Source:         https://download.gnome.org/sources/glib/2.82/glib-%{version}.tar.xz
 
 # Add ptyxis to the list of known terminals (from Fedora)
 Patch:          glib2-default-terminal.patch
@@ -35,7 +35,7 @@ BuildRequires:  pkgconfig(mount)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  python3-devel
 BuildRequires:  /usr/bin/rst2man
-%if %{with introspection}
+%if %{introspection}
 BuildRequires:  /usr/bin/g-ir-scanner
 %endif
 
@@ -75,7 +75,7 @@ The glib2-devel package includes the header files for the GLib library.
     -Ddocumentation=false \
     -Dinstalled_tests=false \
     --default-library=shared \
-%if %{with introspection}
+%if %{introspection}
     -Dintrospection=enabled \
 %else
     -Dintrospection=disabled \
@@ -117,7 +117,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_libdir}/libgmodule-2.0.so.0*
 %{_libdir}/libgobject-2.0.so.0*
 %{_libdir}/libgio-2.0.so.0*
-%if %{with introspection}
+%if %{introspection}
 %{_libdir}/libgirepository-2.0.so.0*
 %dir %{_libdir}/girepository-1.0
 %{_libdir}/girepository-1.0/GIRepository-3.0.typelib
@@ -184,7 +184,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_mandir}/man1/glib-compile-resources.1*
 %{_mandir}/man1/gresource.1*
 %{_datadir}/gdb/
-%if %{with introspection}
+%if %{introspection}
 %dir %{_datadir}/gir-1.0
 %{_datadir}/gir-1.0/GIRepository-3.0.gir
 %{_datadir}/gir-1.0/GLib-2.0.gir

@@ -5,7 +5,7 @@ Summary:        Introspection system for GObject-based libraries
 
 License:        GPL-2.0-or-later AND LGPL-2.0-or-later AND LGPL-2.1-or-later AND BSD-2-Clause
 URL:            https://wiki.gnome.org/Projects/GObjectIntrospection
-Source:         gobject-introspection-%{version}.tar.xz
+Source:         https://download.gnome.org/sources/gobject-introspection/1.84/gobject-introspection-%{version}.tar.xz
 
 # Workaround for Python 3.12 compatibility
 # https://bugzilla.redhat.com/show_bug.cgi?id=2208966
