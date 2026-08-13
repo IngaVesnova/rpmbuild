@@ -49,7 +49,7 @@ Development files for %{name}.
     -Dexamples=false \
     -Dtests=false \
     -Dvapi=false \
-    -Dintrospection=enabled
+    -Dintrospection=true
 
 %meson_build
 
