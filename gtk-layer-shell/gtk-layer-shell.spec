@@ -7,9 +7,6 @@ Summary:        Library to create components for Wayland using the Layer Shell
 License:        LGPL-3.0-or-later AND MIT
 Url:            https://github.com/wmww/gtk-layer-shell
 Source0:        https://github.com/wmww/%{name}/archive/refs/tags/v%{version}.tar.gz
-# OBS's cached AlmaLinux:10 mirror serves a pango-devel build without the
-# GIR files; provide the Pango include closure needed by g-ir-scanner.
-Source10:       gir-pango-1.0.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  meson >= 0.45.1
@@ -48,14 +45,11 @@ Development files for %{name}.
 %autosetup -n %{name}-%{version}
 
 %build
-# supply the vendored GIR include closure to g-ir-scanner via GI_GIR_PATH.
-mkdir -p gir-pango
-tar xzf %{SOURCE10} -C gir-pango/
-export GI_GIR_PATH=$PWD/gir-pango
 %meson \
     -Dexamples=false \
     -Dtests=false \
-    -Dvapi=false
+    -Dvapi=false \
+    -Dintrospection=enabled
 
 %meson_build
 
@@ -75,6 +69,9 @@ export GI_GIR_PATH=$PWD/gir-pango
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
-* Mon Aug 10 2026 like-me - 0.8.2-1
-- Initial package for EPEL 10 (not available there yet)
-- Drop vala/vapi (no vala in EL10), keep introspection typelib
+* Wed Aug 13 2026 Inga Vesnova <inga.vesnova@gmail.com> - 0.10.1-1
+- 0.10.1 for EPEL 10
+- Drop vendored pango GIR workaround (gir-pango-1.0.tar.gz); pango now ships
+  introspection, so g-ir-scanner resolves Pango-1.0.gir from the system
+- Explicitly enable gobject-introspection (-Dintrospection=enabled)
+- Drop vala/vapi (no vala in EL10)
