@@ -30,6 +30,7 @@ BuildRequires: pkgconfig(fontconfig) >= 2.17.0
 BuildRequires: pkgconfig(xft) >= 2.0.0
 BuildRequires: pkgconfig(cairo) >= 1.18.0
 BuildRequires: pkgconfig(cairo-ft) >= 1.18.0
+BuildRequires: pkgconfig(cairo-gobject)
 BuildRequires: pkgconfig(freetype2) >= 2.1.5
 
 Provides: pango-tests = %{version}-%{release}
@@ -91,11 +92,13 @@ fi
 %{_bindir}/pango-list
 %{_bindir}/pango-segmentation
 %{_bindir}/pango-view
+%{_libdir}/girepository-1.0/Pango*.typelib
 
 %files devel
 %{_libdir}/libpango*.so
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
+%{_datadir}/gir-1.0/Pango*.gir
 
 
 %changelog
