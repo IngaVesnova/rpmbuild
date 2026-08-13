@@ -22,7 +22,14 @@ BuildArch:      noarch
 
 BuildRequires:  python3-devel
 
+# Runtime dependencies: the script uses PyGObject (gi.repository) and loads these
+# GObject-introspection typelibs at runtime:
+#   GLib/GObject/Gio  <- glib2
+#   Gtk/Gdk          <- gtk3
+#   WebKit2          <- webkit2gtk4.1
+#   GtkLayerShell    <- gtk-layer-shell
 Requires:       python3-gobject
+Requires:       glib2
 Requires:       gtk3
 Requires:       webkit2gtk4.1
 Requires:       gtk-layer-shell
@@ -54,5 +61,11 @@ install -D -p -m 0755 %{name}.py %{buildroot}%{_bindir}/%{name}
 %license LICENSE
 
 %changelog
+* Wed Aug 13 2026 Inga Vesnova <inga.vesnova@gmail.com> - 1.0-2
+- Fix gi namespace pinning: require Gdk 3.0 explicitly via
+  gi.require_version to avoid the PyGIWarning and ensure correct display
+  detection under Wayland/X11
+- Improve the "failed to get display" runtime error message
+
 * Mon Aug 10 2026 like-me - 1.0-1
 - Initial package: Python 3 port of webkit-layer-shell (wkshell/example.c)

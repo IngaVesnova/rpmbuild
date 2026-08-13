@@ -9,11 +9,17 @@ Behaviour, options and error messages mirror the C reference implementation
 (exit status 2 for command line errors, 1 for runtime errors).
 """
 
+import os
 import sys
 from typing import NoReturn
 
 import gi  # type: ignore[import-not-found]
 
+# Pin every imported namespace explicitly. Gdk is its own typelib (Gdk-3.0) and
+# must be matched to Gtk 3.0; without this PyGObject emits a PyGIWarning and
+# may resolve the wrong Gdk version, which also breaks display detection
+# (Gdk.Display.get_default) under a real Wayland/X11 session.
+gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
 gi.require_version("WebKit2", "4.1")
 
@@ -429,7 +435,11 @@ def main(argv):
     display = Gdk.Display.get_default()
 
     if display is None:
-        fatal_runtime("failed to get display")
+        hint = ""
+        if not os.environ.get("WAYLAND_DISPLAY") and not os.environ.get("DISPLAY"):
+            hint = (" (no WAYLAND_DISPLAY or DISPLAY set; run inside a graphical "
+                    "session, e.g. a Wayland compositor)")
+        fatal_runtime("failed to get display%s" % hint)
 
     n_monitors = display.get_n_monitors()
 
