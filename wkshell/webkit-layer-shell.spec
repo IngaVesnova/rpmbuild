@@ -12,7 +12,7 @@
 
 Name:           webkit-layer-shell
 Version:        1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WebKit web view on a Wayland layer-shell surface (Python)
 
 License:        MIT
@@ -62,10 +62,13 @@ install -D -p -m 0755 %{name}.py %{buildroot}%{_bindir}/%{name}
 
 %changelog
 * Wed Aug 13 2026 Inga Vesnova <inga.vesnova@gmail.com> - 1.0-2
-- Fix gi namespace pinning: require Gdk 3.0 explicitly via
-  gi.require_version to avoid the PyGIWarning and ensure correct display
-  detection under Wayland/X11
-- Improve the "failed to get display" runtime error message
+- Work around WebKitGTK DMA-BUF renderer Wayland protocol error
+  (Error 71 "...dispatching to Wayland display") by setting
+  WEBKIT_DISABLE_DMABUF_RENDERER=1 before WebKit initializes
 
-* Mon Aug 10 2026 like-me - 1.0-1
+* Wed Aug 13 2026 Inga Vesnova <inga.vesnova@gmail.com> - 1.0-1
 - Initial package: Python 3 port of webkit-layer-shell (wkshell/example.c)
+- Fix gi namespace pinning: require Gdk 3.0 explicitly (gi.require_version)
+  to avoid the PyGIWarning and ensure correct display detection under
+  Wayland/X11
+- Improve the "failed to get display" runtime error message

@@ -13,6 +13,12 @@ import os
 import sys
 from typing import NoReturn
 
+# Work around WebKitGTK's DMA-BUF renderer triggering a Wayland protocol error
+# ("Error 71 (Protocol error) dispatching to Wayland display") on some GPUs and
+# compositors. The variable must be present before WebKit initializes, so set it
+# as early as possible. A user-supplied value is always respected.
+os.environ.setdefault("WEBKIT_DISABLE_DMABUF_RENDERER", "1")
+
 import gi  # type: ignore[import-not-found]
 
 # Pin every imported namespace explicitly. Gdk is its own typelib (Gdk-3.0) and
