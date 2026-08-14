@@ -9,6 +9,9 @@ Source0:       %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 
 # autotools build: the GitHub tag archive has no generated configure, so
 # autogen.sh (autoreconf) is run in %build.
+# pcaudiolib-devel is not available in EPEL 10; espeak-ng builds fine without
+# it (only the standalone CLI audio *playback* is disabled, which
+# speech-dispatcher does not need - it handles audio output itself).
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: autoconf
@@ -16,9 +19,6 @@ BuildRequires: automake
 BuildRequires: libtool
 BuildRequires: pkgconfig
 BuildRequires: gettext-devel
-BuildRequires: rubygem-ronn
-BuildRequires: rubygem-kramdown
-BuildRequires: pcaudiolib-devel
 
 %description
 The eSpeak NG (Next Generation) Text-to-Speech program is an open source speech
@@ -42,14 +42,6 @@ Requires: %{name} = %{version}-%{release}
 %description vim
 %{summary}.
 
-%package doc
-Summary: Documentation for espeak-ng
-BuildArch: noarch
-Requires: %{name} = %{version}-%{release}
-
-%description doc
-Documentation for eSpeak NG, a software speech synthesizer.
-
 %prep
 %autosetup
 # Remove unused files to make sure we've got the License tag right
@@ -60,8 +52,6 @@ rm -rf src/include/compat/endian.h src/compat/getopt.c android/
 %configure
 %make_build src/espeak-ng src/speak-ng
 make
-# Force utf8 for docs building
-LC_ALL=C.UTF-8 make docs
 
 %install
 %make_install
@@ -88,8 +78,6 @@ rm -vrf %{buildroot}%{_datadir}/vim/registry
 %{_libdir}/libespeak-ng.so.1
 %{_libdir}/libespeak-ng.so.1.*
 %{_datadir}/espeak-ng-data
-%{_mandir}/man1/speak-ng.1.gz
-%{_mandir}/man1/espeak-ng.1.gz
 
 %files devel
 %{_libdir}/pkgconfig/espeak-ng.pc
@@ -100,9 +88,6 @@ rm -vrf %{buildroot}%{_datadir}/vim/registry
 %{_datadir}/vim/vimfiles/ftdetect/espeakfiletype.vim
 %{_datadir}/vim/vimfiles/syntax/espeaklist.vim
 %{_datadir}/vim/vimfiles/syntax/espeakrules.vim
-
-%files doc
-%doc docs/*.html
 
 %changelog
 * Thu Aug 14 2026 Inga Vesnova <inga.vesnova@gmail.com> - 1.52.0-1
