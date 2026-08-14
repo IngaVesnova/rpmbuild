@@ -21,7 +21,6 @@ BuildRequires:  help2man
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(dotconf)
 BuildRequires:  pkgconfig(sndfile)
-BuildRequires:  pkgconfig(libltdl)
 BuildRequires:  python3-devel
 BuildRequires:  python3-pyxdg
 BuildRequires:  systemd-rpm-macros
