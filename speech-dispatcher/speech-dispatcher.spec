@@ -110,6 +110,7 @@ for developing applications that use %{name}.
 %install
 %make_install
 find %{buildroot} -name '*.la' -delete
+rm -f %{buildroot}%{_infodir}/dir
 %find_lang %{name}
 
 %post libs -p /sbin/ldconfig
@@ -124,6 +125,10 @@ find %{buildroot} -name '*.la' -delete
 %files -f %{name}.lang
 %license COPYING.GPL-2 COPYING.GPL-3 COPYING.LGPL
 %doc ANNOUNCE AUTHORS BUGS NEWS README.md TODO
+%{_infodir}/spd-say.info.gz
+%{_infodir}/speech-dispatcher-cs.info.gz
+%{_infodir}/speech-dispatcher.info.gz
+%{_infodir}/ssip.info.gz
 %config(noreplace) %{_sysconfdir}/speech-dispatcher/speechd.conf
 %config(noreplace) %{_sysconfdir}/speech-dispatcher/clients/*.conf
 %config(noreplace) %{_sysconfdir}/speech-dispatcher/modules/*.conf
