@@ -1,7 +1,7 @@
 
 Name:           mangowm
-Version:        0.15.6
-Release:        0
+Version:        0.16.0
+Release:        2%{?dist}
 Summary:        A scrollable-tiling Wayland compositor (Nexus Optimized)
 
 License:        MIT
