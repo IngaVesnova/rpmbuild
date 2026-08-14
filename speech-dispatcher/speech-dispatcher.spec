@@ -147,8 +147,8 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/libspeechd_module.so.*
 
 %files -n python3-speechd
-%{python3_sitelib}/speechd/
-%{python3_sitelib}/speechd_config/
+%{python3_sitearch}/speechd/
+%{python3_sitearch}/speechd_config/
 %{_bindir}/spd-conf
 %{_mandir}/man1/spd-conf.1*
 
