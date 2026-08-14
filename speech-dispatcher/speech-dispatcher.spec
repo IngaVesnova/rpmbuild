@@ -24,6 +24,7 @@ BuildRequires:  pkgconfig(sndfile)
 BuildRequires:  python3-devel
 BuildRequires:  python3-pyxdg
 BuildRequires:  systemd-rpm-macros
+BuildRequires:  pkgconfig(libsystemd)
 %if %{with espeak}
 BuildRequires:  pkgconfig(espeak-ng)
 %endif
@@ -122,7 +123,7 @@ find %{buildroot} -name '*.la' -delete
 
 %files -f %{name}.lang
 %license COPYING.GPL-2 COPYING.GPL-3 COPYING.LGPL
-%doc ANNOUNCE AUTHORS BUGS NEWS README TODO
+%doc ANNOUNCE AUTHORS BUGS NEWS README.md TODO
 %config(noreplace) %{_sysconfdir}/speech-dispatcher/speechd.conf
 %config(noreplace) %{_sysconfdir}/speech-dispatcher/clients/*.conf
 %config(noreplace) %{_sysconfdir}/speech-dispatcher/modules/*.conf
