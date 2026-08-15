@@ -1,0 +1,1 @@
+u greetd - "greetd daemon user" /var/lib/greetd /sbin/nologin
